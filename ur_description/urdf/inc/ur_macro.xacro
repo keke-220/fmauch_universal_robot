@@ -76,7 +76,7 @@
     <xacro:ur_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
 
     <!-- links: main serial chain -->
-    <link name="${prefix}base_link"/>
+    <link name="${prefix}ur5e_base_link"/>
     <link name="${prefix}base_link_inertia">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
@@ -220,8 +220,8 @@
     </link>
 
     <!-- joints: main serial chain -->
-    <joint name="${prefix}base_link-base_link_inertia" type="fixed">
-      <parent link="${prefix}base_link" />
+    <joint name="${prefix}ur5e_base_link-base_link_inertia" type="fixed">
+      <parent link="${prefix}ur5e_base_link" />
       <child link="${prefix}base_link_inertia" />
       <!-- 'base_link' is REP-103 aligned (so X+ forward), while the internal
            frames of the robot/controller have X+ pointing backwards.
@@ -305,14 +305,14 @@
 
     <!-- ROS-Industrial 'base' frame: base_link to UR 'Base' Coordinates transform -->
     <link name="${prefix}base"/>
-    <joint name="${prefix}base_link-base_fixed_joint" type="fixed">
+    <joint name="${prefix}ur5e_base_link-base_fixed_joint" type="fixed">
       <!-- Note the rotation over Z of pi radians: as base_link is REP-103
            aligned (ie: has X+ forward, Y+ left and Z+ up), this is needed
            to correctly align 'base' with the 'Base' coordinate system of
            the UR controller.
       -->
       <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
-      <parent link="${prefix}base_link"/>
+      <parent link="${prefix}ur5e_base_link"/>
       <child link="${prefix}base"/>
     </joint>
 
